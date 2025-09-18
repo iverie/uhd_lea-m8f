@@ -843,11 +843,12 @@ b200_impl::b200_impl(
     _tree->access<std::string>(mb_path / "time_source/value").set("internal");
 
     //GPS installed: use external ref, time, and init time spec
-    if (_gps and _gps->gps_detected()) {
+    /*if (_gps and _gps->gps_detected()) {
       const int freq = _gps->gps_refclock_frequency();
-      if (not _adf4001_iface->set_refclk_frequency(freq)) {
+    }*/
+
+    if (not _adf4001_iface->set_refclk_frequency(30720)) {
         throw uhd::value_error("Could not set refclk frequency");
-      }
     }
 
     // Set the DSP chains to some safe value
